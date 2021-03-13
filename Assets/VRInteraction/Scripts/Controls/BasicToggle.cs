@@ -13,36 +13,48 @@ using UnityEngine;
 
 namespace VRInteraction
 {
-	public class BasicToggle : MonoBehaviour {
+    public class BasicToggle : MonoBehaviour
+    {
+        public GameObject target;
 
-		public GameObject target;
-		public bool startEnabled;
+        public GameObject blood;
 
-		private bool _enabled;
-		private VRInteractableItem item;
+        public bool startEnabled;
 
-		void Start()
-		{
-			if (target == null) 
-			{
-				Debug.LogError("No Target specified", gameObject);
-				return;
-			}
-			item = GetComponent<VRInteractableItem>();
-			if (item == null)
-			{
-				Debug.LogError("This script requires an VRInteracableItem script on the same object", gameObject);
-				return;
-			}
-			target.gameObject.SetActive(startEnabled);
-			_enabled = startEnabled;
-		}
+        private bool _enabled;
 
-		void ACTION(VRInteractor hand)
-		{
-			if (target == null || item == null || hand.heldItem != item) return;
-			_enabled = !_enabled;
-			target.gameObject.SetActive(_enabled);
-		}
-	}
+        private VRInteractableItem item;
+
+        void Start()
+        {
+            if (target == null)
+            {
+                Debug.LogError("No Target specified", gameObject);
+                return;
+            }
+            item = GetComponent<VRInteractableItem>();
+            if (item == null)
+            {
+                Debug
+                    .LogError("This script requires an VRInteracableItem script on the same object",
+                    gameObject);
+                return;
+            }
+            target.gameObject.SetActive (startEnabled);
+            _enabled = startEnabled;
+        }
+
+        void PICKUP_DROP(VRInteractor hand)
+        {
+            Debug.Log("HELD");
+        }
+
+        void ACTION(VRInteractor hand)
+        {
+            if (target == null || item == null || hand.heldItem != item) return;
+            _enabled = !_enabled;
+            target.gameObject.SetActive (_enabled);
+            blood.SetActive (_enabled);
+        }
+    }
 }

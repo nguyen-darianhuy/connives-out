@@ -30,6 +30,6 @@ public class Movement : MonoBehaviour
             Camera.main.transform.right * x +
             Camera.main.transform.forward * z;
 
-        controller.Move(move * speed * Time.deltaTime + gravity );
+        controller.Move(move * speed * Time.deltaTime + gravity * Time.deltaTime );
     }
 }
