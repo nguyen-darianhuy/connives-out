@@ -51,6 +51,10 @@ namespace Valve.VR
         
         private static SteamVR_Action_Boolean p_vRInteraction_SWITCH;
         
+        private static SteamVR_Action_Boolean p_vRInteraction_TALK;
+        
+        private static SteamVR_Action_Boolean p_vRInteraction_ACCUSE;
+        
         private static SteamVR_Action_Vibration p_vRInteraction_Haptic;
         
         public static SteamVR_Action_Boolean vRInteraction_ACTION
@@ -189,6 +193,22 @@ namespace Valve.VR
             }
         }
         
+        public static SteamVR_Action_Boolean vRInteraction_TALK
+        {
+            get
+            {
+                return SteamVR_Actions.p_vRInteraction_TALK.GetCopy<SteamVR_Action_Boolean>();
+            }
+        }
+        
+        public static SteamVR_Action_Boolean vRInteraction_ACCUSE
+        {
+            get
+            {
+                return SteamVR_Actions.p_vRInteraction_ACCUSE.GetCopy<SteamVR_Action_Boolean>();
+            }
+        }
+        
         public static SteamVR_Action_Vibration vRInteraction_Haptic
         {
             get
@@ -217,6 +237,8 @@ namespace Valve.VR
                     SteamVR_Actions.vRInteraction_ScopeToggle,
                     SteamVR_Actions.vRInteraction_TELEPORT,
                     SteamVR_Actions.vRInteraction_SWITCH,
+                    SteamVR_Actions.vRInteraction_TALK,
+                    SteamVR_Actions.vRInteraction_ACCUSE,
                     SteamVR_Actions.vRInteraction_Haptic};
             Valve.VR.SteamVR_Input.actionsIn = new Valve.VR.ISteamVR_Action_In[] {
                     SteamVR_Actions.vRInteraction_ACTION,
@@ -235,7 +257,9 @@ namespace Valve.VR
                     SteamVR_Actions.vRInteraction_LightToggle,
                     SteamVR_Actions.vRInteraction_ScopeToggle,
                     SteamVR_Actions.vRInteraction_TELEPORT,
-                    SteamVR_Actions.vRInteraction_SWITCH};
+                    SteamVR_Actions.vRInteraction_SWITCH,
+                    SteamVR_Actions.vRInteraction_TALK,
+                    SteamVR_Actions.vRInteraction_ACCUSE};
             Valve.VR.SteamVR_Input.actionsOut = new Valve.VR.ISteamVR_Action_Out[] {
                     SteamVR_Actions.vRInteraction_Haptic};
             Valve.VR.SteamVR_Input.actionsVibration = new Valve.VR.SteamVR_Action_Vibration[] {
@@ -254,7 +278,9 @@ namespace Valve.VR
                     SteamVR_Actions.vRInteraction_LightToggle,
                     SteamVR_Actions.vRInteraction_ScopeToggle,
                     SteamVR_Actions.vRInteraction_TELEPORT,
-                    SteamVR_Actions.vRInteraction_SWITCH};
+                    SteamVR_Actions.vRInteraction_SWITCH,
+                    SteamVR_Actions.vRInteraction_TALK,
+                    SteamVR_Actions.vRInteraction_ACCUSE};
             Valve.VR.SteamVR_Input.actionsSingle = new Valve.VR.SteamVR_Action_Single[] {
                     SteamVR_Actions.vRInteraction_TriggerPressure};
             Valve.VR.SteamVR_Input.actionsVector2 = new Valve.VR.SteamVR_Action_Vector2[] {
@@ -277,7 +303,9 @@ namespace Valve.VR
                     SteamVR_Actions.vRInteraction_LightToggle,
                     SteamVR_Actions.vRInteraction_ScopeToggle,
                     SteamVR_Actions.vRInteraction_TELEPORT,
-                    SteamVR_Actions.vRInteraction_SWITCH};
+                    SteamVR_Actions.vRInteraction_SWITCH,
+                    SteamVR_Actions.vRInteraction_TALK,
+                    SteamVR_Actions.vRInteraction_ACCUSE};
         }
         
         private static void PreInitActions()
@@ -299,6 +327,8 @@ namespace Valve.VR
             SteamVR_Actions.p_vRInteraction_ScopeToggle = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/VRInteraction/in/ScopeToggle")));
             SteamVR_Actions.p_vRInteraction_TELEPORT = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/VRInteraction/in/TELEPORT")));
             SteamVR_Actions.p_vRInteraction_SWITCH = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/VRInteraction/in/SWITCH")));
+            SteamVR_Actions.p_vRInteraction_TALK = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/VRInteraction/in/TALK")));
+            SteamVR_Actions.p_vRInteraction_ACCUSE = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/VRInteraction/in/ACCUSE")));
             SteamVR_Actions.p_vRInteraction_Haptic = ((SteamVR_Action_Vibration)(SteamVR_Action.Create<SteamVR_Action_Vibration>("/actions/VRInteraction/out/Haptic")));
         }
     }

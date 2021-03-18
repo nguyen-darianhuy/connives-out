@@ -71,6 +71,16 @@
       "type": "boolean"
     },
     {
+      "name": "/actions/VRInteraction/in/TALK",
+      "type": "boolean",
+      "requirement": "mandatory"
+    },
+    {
+      "name": "/actions/VRInteraction/in/ACCUSE",
+      "type": "boolean",
+      "requirement": "mandatory"
+    },
+    {
       "name": "/actions/VRInteraction/out/Haptic",
       "type": "vibration"
     }

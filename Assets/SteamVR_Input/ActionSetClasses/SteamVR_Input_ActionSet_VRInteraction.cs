@@ -153,6 +153,22 @@ namespace Valve.VR
             }
         }
         
+        public virtual SteamVR_Action_Boolean TALK
+        {
+            get
+            {
+                return SteamVR_Actions.vRInteraction_TALK;
+            }
+        }
+        
+        public virtual SteamVR_Action_Boolean ACCUSE
+        {
+            get
+            {
+                return SteamVR_Actions.vRInteraction_ACCUSE;
+            }
+        }
+        
         public virtual SteamVR_Action_Vibration Haptic
         {
             get

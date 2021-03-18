@@ -44,11 +44,6 @@ namespace VRInteraction
             _enabled = startEnabled;
         }
 
-        void PICKUP_DROP(VRInteractor hand)
-        {
-            Debug.Log("HELD");
-        }
-
         void ACTION(VRInteractor hand)
         {
             if (target == null || item == null || hand.heldItem != item) return;
