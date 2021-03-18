@@ -30,5 +30,5 @@ Material:
     - _StrengthScalar: 50
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _LightDirection: {r: 0.28804225, g: -0, b: 0.957618, a: 0}
-    - _LightPosition: {r: -2.1329007, g: 1.957, b: -2.3303812, a: 0}
+    - _LightDirection: {r: 0.45275277, g: -0, b: 0.89163613, a: 0}
+    - _LightPosition: {r: -2.2217145, g: 1.735, b: -2.4538445, a: 0}
