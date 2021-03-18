@@ -17,8 +17,6 @@ namespace VRInteraction
     {
         public GameObject target;
 
-        public GameObject blood;
-
         public bool startEnabled;
 
         private bool _enabled;
@@ -49,7 +47,6 @@ namespace VRInteraction
             if (target == null || item == null || hand.heldItem != item) return;
             _enabled = !_enabled;
             target.gameObject.SetActive (_enabled);
-            blood.SetActive (_enabled);
         }
     }
 }

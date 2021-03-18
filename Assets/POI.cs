@@ -73,7 +73,7 @@ public class POI : MonoBehaviour
             //TODO Remove this
             if (dialogueCount > 0)
             {
-                nervous += 0.33f;
+                nervous += 0.5f;
                 anim.SetFloat("Nervous", nervous);
             }
         }
