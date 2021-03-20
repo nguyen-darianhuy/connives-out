@@ -1,0 +1,253 @@
+<html>
+<head>
+  <title>Connives Out</title>
+
+  <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,700,400italic,700italic" rel="stylesheet" type="text/css">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: white;
+      color: #333333;
+      -webkit-font-smoothing: antialiased;
+      font-size: 16px;
+      font-family: "Source Sans Pro", Helvetica;
+    }
+
+    img {
+      display: block;
+    }
+
+    em {
+      font-size: 12px;
+    }
+
+    #signature {
+      margin-left: 30px;
+      font-style: oblique;
+    }
+
+    a:link,
+    a:visited {
+      color: #165788;
+      text-decoration: none;
+    }
+
+    a:hover,
+    a:focus,
+    a:active {
+      text-decoration: underline;
+    }
+
+    .wrapper {
+      width: 660px;
+      margin: auto;
+    }
+
+    .container {
+      width: 660px;
+      margin: auto;
+    }
+
+    #content {
+      width: 650px;
+      margin: 70px auto 0px auto;
+    }
+
+    #content article {
+      margin-bottom: 150px;
+    }
+
+    #content h1 {
+      color: black;
+      margin-bottom: 10px;
+      font-weight: 400;
+      font-size: 48px;
+    }
+
+    #content h2 {
+        color: black;
+        margin-bottom: 20px;
+      font-weight: 300;
+      font-size: 32px;
+
+    }
+
+    #content h3 {
+      color: black;
+      border-bottom: 1px solid black;
+      text-transform: uppercase;
+      margin: 30px 0px 30px 0px;
+      font-size: 28px;
+      font-weight: 200;
+    }
+
+    #content p {
+      width: 100%;
+      line-height: 150%;
+      margin-bottom: 20px;
+    }
+
+    #content p:first-child {
+      font-size: 18px;
+      font-style: italic;
+      letter-spacing: 2px;
+    }
+
+    #content p:first-child:first-line {
+        font-weight: bold;
+    }
+  
+    #content ul {
+        padding-left:25px
+    }
+
+    pre {
+      font-size: 10px;
+      padding: 15px;
+      border-radius: 10px;
+      background: #ddd;
+    }
+
+    .dualimages {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        
+    }
+    .dualimages a:first-child {
+        
+        margin-right: 16px;
+
+    }
+  </style>
+</head>
+
+<body><div class="wrapper"><section id="content">
+
+<h1>Connives Out</h1>
+<h2>VR Murder Mystery Experience</h2>
+
+<h4>Darian Nguyen - CSC 377 - Winter 2021 - Christian Eckhardt</h4>
+
+<article> <!-- This adds padding at the top and bottom -->
+
+
+
+
+<h3>Project Description</h3>
+
+<p>My final project is "Connives Out," a reference to the movie "Knives Out." I was inspired by games like L.A. Noire and Phoenix Wright: Ace Attorney where the player
+    plays the role of a detective. 
+
+<div class="dualimages">
+  <a>
+    <img src="https://i.imgur.com/dZVgxj6.png" width="100%">
+  <em>L.A. Noire</em>
+  </a>
+  <a>
+    <img src="https://i.imgur.com/Ms2qNiJ.png" width="100%">
+    <em>Phoenix Wright: Ace Attorney</em>
+  </a>
+</div>
+
+    <br />
+    Main gameplay features:
+
+  <ul>
+    <li>Playtime: ~15-20 min</li>
+    <li>Exploring crime scenes (in this case, it's a murder scene taking place in a house)</li>
+    <li>Examining evidence</li>
+    <li>Using special tools to uncover hidden evidence</li>
+    <li>Questioning suspects/witnesses</li>
+  </ul>
+  <p></p>
+
+  I wanted to keep this experience very simple, so questioning witnesses is very linear. Basically, if you have enough evidence, you can continue talking to them. Once you have
+  exhausted their dialogue, you can choose whether or not to accuse them, which ends the game and gives you an ending scenario based on if you accused the correct person.
+    
+<center>
+  <a>
+    <img src="https://i.imgur.com/yr3Gw1L.png" width="100%">
+  </a>
+  <em>Linear dialogue system</em>
+</center>
+<p></p>
+</p>
+
+<h3>Technical Implementation</h3>
+<p>
+I took the conventional approach to implementing the basic VR features in this game, like locomotion and grabbing objects. However, I am proud of a few things: 
+</p>
+<h4>Blacklight (special tool)</h4>
+<p>The player has access to a blacklight, which can detect cleaned-up blood. This was done using custom shaders (shoutouts to lab 5), and following 
+    <a href="https://youtu.be/b4utgRuIekk" target="_blank">Sam Wronski's tutorial</a>.
+</p>
+
+<center>
+  <a>
+    <img src="https://i.imgur.com/Uw9ysvm.png" width="100%">
+  </a>
+  <em>Regular torch (left) vs. Blacklight (right)</em>
+</center>
+<p></p>
+
+<h4>Linear Dialogue & Evidence System</h4>
+<p>Whenever the player picks up a piece of evidence, a UnityEvent is called to process it (aka run sound effects, store data, etc.), and the game state is stored in my EvidenceManager Singleton, which
+    keeps track of all evidence gathered.
+</p>
+<center>
+  <a>
+    <img src="https://i.imgur.com/KdTSaBO.png" width="100%">
+  </a>
+  <em>Example of an Evidence GameObject: picking up this object plays the AudioClip and adds the "Knife" evidence object to the EvidenceManager</em>
+</center>
+<p></p>
+
+<h4>Immersiveness</h4>
+<p>Phoenix Wright: Ace Attorney had two very subtle, yet powerful game design effects that I wanted to emulate:  
+    <ul>
+    <li>Dynamic character poses, that reveal something about the character's emotions/personality</li>
+<p>
+    To accomplish this, I gave all characters a "Nervousness" parameter, which increased based on the dialogue, and I tied that parameter to an animation blendtree. This gave the effect
+    of a character's pose changing as they got more and more nervous. 
+</p>
+<center>
+  <a>
+    <img src="https://i.imgur.com/22IOOpL.png" width="100%">
+  </a>
+  <em>Example of a character getting more "nervous"</em>
+</center>
+    <li>Dynamic music, which changes depending on the situation (e.g investigation music, interrogation music)</li>
+<p>
+    I wanted to have music as a primary ambient effect, but I didn't want it to overpower characters' voices, so I temporarily decreased the music volume whenever a character is speaking. After the character
+    is done speaking, the music reverts to its original volume.
+</p>
+    </ul>
+
+</p>
+
+<h3>Final Product</h3>
+<p>Here is a quick demo of the v0.9 (3/18/2021) build, featuring the blacklight, evidence pickup, and suspect interrogation mechanics. I kept it short as to not spoil anything, so if you're into 
+    murder mysteries, please try out my project below! I'm sure you'll enjoy it.
+<center>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/f4q4l84c0fo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</center>
+
+<p>
+</p>
+
+<h3>Project Github & Download</h3>
+You can take a look at my project source code & download the latest release here:
+<a href="https://github.com/nguyen-darianhuy/connives-out" target="_blank">
+<p>
+    Connives Out Github Repo
+</p>
+</a>
+
+</article></section></div></body></html>
