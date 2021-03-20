@@ -18,8 +18,8 @@
 //			(Does not affect the game view, however.)
 //
 //=============================================================================
-
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Valve.VR;
 
 namespace Valve.VR
@@ -27,34 +27,51 @@ namespace Valve.VR
     public class SteamVR_Fade : MonoBehaviour
     {
         private Color currentColor = new Color(0, 0, 0, 0); // default starting color: black and fully transparent
-        private Color targetColor = new Color(0, 0, 0, 0);  // default target color: black and fully transparent
-        private Color deltaColor = new Color(0, 0, 0, 0);   // the delta-color is basically the "speed / second" at which the current color should change
+
+        private Color targetColor = new Color(0, 0, 0, 0); // default target color: black and fully transparent
+
+        private Color deltaColor = new Color(0, 0, 0, 0); // the delta-color is basically the "speed / second" at which the current color should change
+
         private bool fadeOverlay = false;
 
-        static public void Start(Color newColor, float duration, bool fadeOverlay = false)
+        public static void Start(
+            Color newColor,
+            float duration,
+            bool fadeOverlay = false
+        )
         {
-            SteamVR_Events.Fade.Send(newColor, duration, fadeOverlay);
+            SteamVR_Events.Fade.Send (newColor, duration, fadeOverlay);
         }
 
-        static public void View(Color newColor, float duration)
+        public static void View(Color newColor, float duration)
         {
             var compositor = OpenVR.Compositor;
             if (compositor != null)
-                compositor.FadeToColor(duration, newColor.r, newColor.g, newColor.b, newColor.a, false);
+                compositor
+                    .FadeToColor(duration,
+                    newColor.r,
+                    newColor.g,
+                    newColor.b,
+                    newColor.a,
+                    false);
         }
 
-#if TEST_FADE_VIEW
-	void Update()
-	{
-		if (Input.GetKeyDown(KeyCode.Space))
-		{
-			SteamVR_Fade.View(Color.black, 0);
-			SteamVR_Fade.View(Color.clear, 1);
-		}
-	}
-#endif
+        void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                Debug.Log("FADING");
+                SteamVR_Fade.View(Color.black, 2);
+                SceneManager.LoadScene("CreditsScene");
+                // SteamVR_Fade.View(Color.clear, 1);
+            }
+        }
 
-        public void OnStartFade(Color newColor, float duration, bool fadeOverlay)
+        public void OnStartFade(
+            Color newColor,
+            float duration,
+            bool fadeOverlay
+        )
         {
             if (duration > 0.0f)
             {
@@ -68,6 +85,7 @@ namespace Valve.VR
         }
 
         static Material fadeMaterial = null;
+
         static int fadeMaterialColorID = -1;
 
         void OnEnable()
@@ -78,13 +96,13 @@ namespace Valve.VR
                 fadeMaterialColorID = Shader.PropertyToID("fadeColor");
             }
 
-            SteamVR_Events.Fade.Listen(OnStartFade);
+            SteamVR_Events.Fade.Listen (OnStartFade);
             SteamVR_Events.FadeReady.Send();
         }
 
         void OnDisable()
         {
-            SteamVR_Events.Fade.Remove(OnStartFade);
+            SteamVR_Events.Fade.Remove (OnStartFade);
         }
 
         void OnPostRender()
@@ -92,7 +110,10 @@ namespace Valve.VR
             if (currentColor != targetColor)
             {
                 // if the difference between the current alpha and the desired alpha is smaller than delta-alpha * deltaTime, then we're pretty much done fading:
-                if (Mathf.Abs(currentColor.a - targetColor.a) < Mathf.Abs(deltaColor.a) * Time.deltaTime)
+                if (
+                    Mathf.Abs(currentColor.a - targetColor.a) <
+                    Mathf.Abs(deltaColor.a) * Time.deltaTime
+                )
                 {
                     currentColor = targetColor;
                     deltaColor = new Color(0, 0, 0, 0);
@@ -114,7 +135,7 @@ namespace Valve.VR
 
             if (currentColor.a > 0 && fadeMaterial)
             {
-                fadeMaterial.SetColor(fadeMaterialColorID, currentColor);
+                fadeMaterial.SetColor (fadeMaterialColorID, currentColor);
                 fadeMaterial.SetPass(0);
                 GL.Begin(GL.QUADS);
 

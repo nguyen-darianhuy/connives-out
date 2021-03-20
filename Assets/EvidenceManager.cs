@@ -7,6 +7,7 @@ public enum Item
 {
     Null,
     FirstLanaTalk,
+    Drugs,
     Poison,
     Knife,
     Clipboard,
@@ -56,13 +57,16 @@ public class EvidenceManager : MonoBehaviour
     {
         const int DELAY = 1;
 
+        AddEvidence(evidence.item);
+
         audio.Stop();
         audio.clip = evidence.clip;
         audio.Play();
 
+        SoundManager
+            .Instance
+            .LowerVolumeForDialogue(evidence.clip.length + DELAY);
         yield return new WaitForSeconds(evidence.clip.length + DELAY);
-
-        AddEvidence(evidence.item);
     }
 
     private void UpdateTriggers(Item justAdded)

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Valve.VR;
 
@@ -19,7 +20,11 @@ public class POI : MonoBehaviour
 
     public Item[] unlockTriggers;
 
+    public int[] nervousTriggers;
+
     public List<int> dialogueCheckpoints;
+
+    public bool debugEnd = false; //TODO REMOVE THIS
 
     private TextMesh text;
 
@@ -71,9 +76,10 @@ public class POI : MonoBehaviour
             AdvanceDialogue();
 
             //TODO Remove this
-            if (dialogueCount > 0)
+            if (dialogueCount < nervousTriggers.Length)
             {
-                nervous += 0.5f;
+                nervous += nervousTriggers[dialogueCount] / 100f;
+                nervousTriggers[dialogueCount] = 0;
                 anim.SetFloat("Nervous", nervous);
             }
         }
@@ -121,6 +127,10 @@ public class POI : MonoBehaviour
 
         if (dialogueCount >= dialogues.Length)
         {
+            if (debugEnd)
+            {
+                StartCoroutine(DebugEnd());
+            }
             ResetDialogue();
             yield break;
         }
@@ -165,7 +175,7 @@ public class POI : MonoBehaviour
     private void ResetDialogue()
     {
         dialogueCount = lastDialogueCheckpoint;
-        text.text = dialoguePrompts[0];
+        text.text = dialoguePrompts[lastDialogueCheckpoint];
     }
 
     private void TurnTextToPlayer()
@@ -176,5 +186,15 @@ public class POI : MonoBehaviour
                 text.transform.position.y,
                 target.position.z);
         text.transform.LookAt(2 * text.transform.position - targetPosition);
+    }
+
+    private IEnumerator DebugEnd()
+    {
+        SteamVR_Fade.View(Color.black, 4);
+
+        yield return new WaitForSeconds(4f);
+
+        SceneManager.LoadScene("CreditsScene");
+        SteamVR_Fade.View(Color.clear, 4);
     }
 }
