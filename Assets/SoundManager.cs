@@ -1,14 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class SoundManager : MonoBehaviour
 {
-    public AudioClip ambient;
+    public AudioMixer mixer;
+
+    public AudioClip[] ambients;
 
     public AudioClip dialogue;
-
-    public AudioClip credits;
 
     public AudioClip logic;
 
@@ -43,9 +44,9 @@ public class SoundManager : MonoBehaviour
         audio.Play();
     }
 
-    public void PlayAmbient()
+    public void PlayAmbient(int index)
     {
-        PlayClip (ambient);
+        PlayClip(ambients[index]);
     }
 
     public void PlayDialogue()
@@ -56,11 +57,6 @@ public class SoundManager : MonoBehaviour
     public void PlayLogic()
     {
         PlayClip (logic);
-    }
-
-    public void PlayCredits()
-    {
-        PlayClip (credits);
     }
 
     public void LowerVolumeForDialogue(float dialogueTime)
