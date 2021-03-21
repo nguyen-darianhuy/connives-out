@@ -536,10 +536,10 @@ GameObject:
   m_Component:
   - component: {fileID: 8470497755997794198}
   - component: {fileID: 8470497755988164610}
+  - component: {fileID: 1505767330234110288}
   - component: {fileID: 1505767330234110292}
   - component: {fileID: 1505767330234110289}
   - component: {fileID: 1505767330234110290}
-  - component: {fileID: 1505767330234110288}
   m_Layer: 0
   m_Name: Jake
   m_TagString: Untagged
@@ -590,6 +590,50 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1505767330234110288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8470497755997565558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0dd92bd971aafe459e07caaf13668b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  talkAction:
+    actionPath: /actions/VRInteraction/in/TALK
+    needsReinit: 0
+  handType: 0
+  dialogues:
+  - {fileID: 8300000, guid: 1e80f0d3768728e4796e39fb93dbdf74, type: 3}
+  - {fileID: 8300000, guid: b042a39896e96954e94120a34dba63b6, type: 3}
+  - {fileID: 8300000, guid: b042a39896e96954e94120a34dba63b6, type: 3}
+  - {fileID: 8300000, guid: b042a39896e96954e94120a34dba63b6, type: 3}
+  dialoguePrompts:
+  - Talk (A)
+  - Fight with Bruce?
+  - Drugs in bathroom?
+  - Knife?
+  requiredTriggers: 00000000010000000200000004000000
+  unlockTriggers: 0000000000000000000000000000000000000000
+  nervousTriggers: 
+  dialogueCheckpoints: 010000000200000003000000
+  endEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!65 &1505767330234110292
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -712,35 +756,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1505767330234110288
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8470497755997565558}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0dd92bd971aafe459e07caaf13668b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  talkAction:
-    actionPath: /actions/VRInteraction/in/TALK
-    needsReinit: 0
-  handType: 0
-  dialogues:
-  - {fileID: 8300000, guid: 1e80f0d3768728e4796e39fb93dbdf74, type: 3}
-  - {fileID: 8300000, guid: b042a39896e96954e94120a34dba63b6, type: 3}
-  - {fileID: 8300000, guid: b042a39896e96954e94120a34dba63b6, type: 3}
-  - {fileID: 8300000, guid: b042a39896e96954e94120a34dba63b6, type: 3}
-  dialoguePrompts:
-  - Talk (A)
-  - Fight with Bruce?
-  - Drugs in bathroom?
-  - Knife?
-  requiredTriggers: 00000000010000000200000004000000
-  unlockTriggers: 0000000000000000000000000000000000000000
-  dialogueCheckpoints: 010000000200000003000000
 --- !u!1 &8470497755997565560
 GameObject:
   m_ObjectHideFlags: 0

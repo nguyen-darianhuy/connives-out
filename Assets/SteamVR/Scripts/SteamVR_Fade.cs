@@ -58,13 +58,13 @@ namespace Valve.VR
 
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                Debug.Log("FADING");
-                SteamVR_Fade.View(Color.black, 2);
-                SceneManager.LoadScene("CreditsScene");
-                // SteamVR_Fade.View(Color.clear, 1);
-            }
+            // if (Input.GetKeyDown(KeyCode.Space))
+            // {
+            //     Debug.Log("FADING");
+            //     SteamVR_Fade.View(Color.black, 2);
+            //     SceneManager.LoadScene("CreditsScene");
+            //     // SteamVR_Fade.View(Color.clear, 1);
+            // }
         }
 
         public void OnStartFade(

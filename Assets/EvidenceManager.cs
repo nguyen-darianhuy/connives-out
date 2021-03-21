@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
+using Valve.VR;
 
 public enum Item
 {
@@ -85,5 +87,21 @@ public class EvidenceManager : MonoBehaviour
         audio.Play();
 
         SoundManager.Instance.LowerVolumeForDialogue(audio.clip.length);
+    }
+
+    public void EndGame(string accused)
+    {
+        //setAccused(accused); //TODO Implement accuse
+        StartCoroutine(EndGame());
+    }
+
+    private IEnumerator EndGame()
+    {
+        SteamVR_Fade.View(Color.black, 4);
+
+        yield return new WaitForSeconds(4f);
+
+        SceneManager.LoadScene("CreditsScene");
+        SteamVR_Fade.View(Color.clear, 4);
     }
 }
