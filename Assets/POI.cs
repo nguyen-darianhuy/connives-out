@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 using UnityEngine.UI;
 using Valve.VR;
 
@@ -11,6 +11,8 @@ public class POI : MonoBehaviour
     public SteamVR_Action_Boolean talkAction;
 
     public SteamVR_Input_Sources handType;
+
+    public AudioSource audio;
 
     public AudioClip[] dialogues;
 
@@ -24,7 +26,7 @@ public class POI : MonoBehaviour
 
     public List<int> dialogueCheckpoints;
 
-    public bool debugEnd = false; //TODO REMOVE THIS
+    public UnityEvent endEvent;
 
     private TextMesh text;
 
@@ -38,8 +40,6 @@ public class POI : MonoBehaviour
 
     private bool isTalking;
 
-    private AudioSource audio;
-
     private Coroutine coroutine;
 
     private float nervous;
@@ -49,7 +49,6 @@ public class POI : MonoBehaviour
     {
         text = GetComponentInChildren<TextMesh>();
         anim = GetComponent<Animator>();
-        audio = GetComponent<AudioSource>();
 
         dialogueCount = 0;
         playerInRange = false;
@@ -75,16 +74,15 @@ public class POI : MonoBehaviour
             text.gameObject.SetActive(false);
             AdvanceDialogue();
 
-            //TODO Remove this
             if (dialogueCount < nervousTriggers.Length)
             {
                 nervous += nervousTriggers[dialogueCount] / 100f;
                 nervousTriggers[dialogueCount] = 0;
-                anim.SetFloat("Nervous", nervous);
             }
         }
 
         TurnTextToPlayer();
+        anim.SetFloat("Nervous", nervous, 2f, Time.deltaTime);
     }
 
     private void AdvanceDialogue()
@@ -127,9 +125,9 @@ public class POI : MonoBehaviour
 
         if (dialogueCount >= dialogues.Length)
         {
-            if (debugEnd)
+            if (endEvent != null)
             {
-                StartCoroutine(DebugEnd());
+                endEvent.Invoke();
             }
             ResetDialogue();
             yield break;
@@ -186,15 +184,5 @@ public class POI : MonoBehaviour
                 text.transform.position.y,
                 target.position.z);
         text.transform.LookAt(2 * text.transform.position - targetPosition);
-    }
-
-    private IEnumerator DebugEnd()
-    {
-        SteamVR_Fade.View(Color.black, 4);
-
-        yield return new WaitForSeconds(4f);
-
-        SceneManager.LoadScene("CreditsScene");
-        SteamVR_Fade.View(Color.clear, 4);
     }
 }
